@@ -1,0 +1,42 @@
+<?php
+error_reporting(0);
+	include_once("connnection.php");
+	require("search.php");
+	extract($_POST);
+	$username=$_POST['searchname'];
+	$number=1;
+	if(isset($_POST['search']))
+	{
+		$query = "SELECT * FROM 'student' WHERE name like '%".$username."%' ";
+		$row=mysqli_query($conn,$query);
+		echo"<table>
+		<tr>
+		<th>name</th>
+		</tr>
+		<tr>
+		<th>email</th>
+		</tr>
+		<tr>
+		<th>address</th>
+		</tr>";
+		while($result=mysqli_fetch_assoc($row))
+		{
+			echo"<table>
+			<tr>
+				<td>".$number."</td>
+				</tr>
+				<tr>
+				<td>".$result['name']."</td>
+				</tr>
+				<tr>
+				<td>".$result['email']."</td>
+				</tr>
+				<tr>
+				<td>".$result['address']."</td>
+				</tr>";
+			
+			$number++;
+		}
+		echo "</table>";
+	}
+?>
